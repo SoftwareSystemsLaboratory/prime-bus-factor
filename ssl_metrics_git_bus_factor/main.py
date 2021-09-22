@@ -1,6 +1,5 @@
-from json import load
-from pprint import pprint as print
-
+from json import dump, load
+from typing import Any
 
 def loadJSON(filename: str) -> list:
     with open(file=filename, mode="r") as file:
@@ -68,12 +67,16 @@ def fillMissingDays(data: dict) -> dict:
 
     return data
 
-
+def dumpJSON(json: Any, filename: str) -> None:
+    with open(file=filename, mode="w") as file:
+        dump(json, file)
+        file.close()
+    
 def main() -> None:
-    data = loadJSON("commits.json")
-    b = buildBusFactor(data)
-    print(fillMissingDays(b))
-
+    data: list = loadJSON("commits.json")
+    bf: dict = buildBusFactor(data)
+    bf: dict = fillMissingDays(bf)
+    dumpJSON(bf, "temp.json")
 
 if __name__ == "__main__":
     main()
