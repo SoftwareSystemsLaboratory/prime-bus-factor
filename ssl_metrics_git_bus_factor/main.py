@@ -1,4 +1,5 @@
 from json import load
+from pprint import pprint as print
 
 
 def loadJSON(filename: str) -> list:
@@ -6,7 +7,7 @@ def loadJSON(filename: str) -> list:
         return load(file)
 
 
-def buildBusFactor(commits: list) -> list:
+def buildBusFactor(commits: list) -> dict:
     data: dict = {}
 
     commit: dict
@@ -15,6 +16,13 @@ def buildBusFactor(commits: list) -> list:
         authorName: str = commit["author_name"]
         authorEmail: str = commit["author_email"]
         authorLOC: int = abs(commit["delta_loc"])
+
+        dataRecord: dict = {
+            "author_email": authorEmail,
+            "author_name": authorName,
+            "loc": authorLOC,
+            "commits": 1,
+        }
 
         try:
             if type(data[day]) is list:
@@ -26,28 +34,45 @@ def buildBusFactor(commits: list) -> list:
                         record["loc"] += authorLOC
                         record["commits"] += 1
                         HAS_RECORD = True
-                        break
 
                 if HAS_RECORD == True:
-                    continue
+                    pass
                 else:
-                    data[day].append(
-                        {
-                            "author_email": authorEmail,
-                            "author_name": authorName,
-                            "loc": authorLOC,
-                            "commits": 1,
-                        }
-                    )
+                    data[day].append(dataRecord)
 
         except KeyError:
             data[day] = []
-    print(data)
+            data[day].append(dataRecord)
+
+    return data
+
+
+def fillMissingDays(data: dict) -> dict:
+    days: list = list(data.keys())
+
+    index: int
+    for index in range(len(days)):
+        try:
+            difference: int = days[index + 1] - days[index]
+            if difference == 1:
+                pass
+            else:
+                differenceIndex: int
+                for differenceIndex in range(difference):
+                    if differenceIndex == 0:
+                        pass
+                    else:
+                        data[index + differenceIndex] = []
+        except IndexError:
+            pass
+
+    return data
 
 
 def main() -> None:
     data = loadJSON("commits.json")
-    buildBusFactor(data)
+    b = buildBusFactor(data)
+    print(fillMissingDays(b))
 
 
 if __name__ == "__main__":
