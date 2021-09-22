@@ -1,13 +1,13 @@
 from setuptools import setup
 
-from ssl_metrics_bus_factor import version
+from ssl_metrics_git_bus_factor import version
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="ssl-metrics-bus-factor",
-    packages=["ssl_metrics_bus_factor"],
+    name="ssl-metrics-git-bus-factor",
+    packages=["ssl_metrics__git_bus_factor"],
     version=version.version(),
     description="SSL Metrics - Bus Factor Metric",
     author="Software and Systems Laboratory - Loyola University Chicago",
@@ -53,8 +53,8 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "ssl-metrics-bus-factor-collect = ssl_metrics_bus_factor.FILENAME:main",
-            "ssl-metrics-bus-factor-graph = ssl_metrics_bus_factor.create_graph:main",
+            "ssl-metrics-git-bus-factor-collect = ssl_metrics_git_bus_factor.main:main",
+            "ssl-metrics-git-bus-factor-graph = ssl_metrics_git_bus_factor.create_graph:main",
         ]
     },
 )
