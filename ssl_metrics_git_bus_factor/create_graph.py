@@ -3,13 +3,20 @@ from argparse import ArgumentParser, Namespace
 
 def get_argparse() -> Namespace:
     parser: ArgumentParser = ArgumentParser(
-        prog="PROGRAM NAME",
-        usage="PROGRAM DESCRIPTION",
+        prog="SSL Metrics - Bus Factor Graph Creator",
+        usage="Takes a JSON file of bus factor information as an input and outputs graphs based on the bus factor information.",
     )
     parser.add_argument(
         "-i",
         "--input",
         help="The input JSON file that is to be used for graphing",
+        type=str,
+        required=True,
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        help="The output filename that is to be used for the graph",
         type=str,
         required=True,
     )
@@ -23,6 +30,8 @@ def main() -> None:
     if args.input[-5::] != ".json":
         print("Invalid input file type. Input file must be JSON")
         quit(1)
+
+
 
 
 if __name__ == "__main__":

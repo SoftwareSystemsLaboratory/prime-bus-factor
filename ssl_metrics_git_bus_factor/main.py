@@ -60,6 +60,11 @@ def dumpJSON(json: Any, filename: str) -> None:
 
 def main() -> None:
     args: Namespace = get_argparse()
+
+    if args.input[-5::] != ".json":
+        print("Invalid input file type. Input file must be JSON")
+        quit(1)
+
     data: list = loadJSON(filename=args.input)
     bf: dict = buildBusFactor(data)
     dumpJSON(bf, args.output)
