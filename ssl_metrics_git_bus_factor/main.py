@@ -2,7 +2,6 @@ from json import dump, load
 from typing import Any
 from argparse import ArgumentParser, Namespace
 
-
 def get_argparse() -> Namespace:
     parser: ArgumentParser = ArgumentParser(
         prog="SSL Metrics - Bus Factor Calculator",
@@ -30,8 +29,8 @@ def loadJSON(filename: str) -> list:
         return load(file)
 
 
-def buildBusFactor(commits: list) -> dict:
-    data: dict = {}
+def buildBusFactor(commits: list) -> list:
+    data: list = []
 
     commit: dict
     for commit in commits:
@@ -45,27 +44,10 @@ def buildBusFactor(commits: list) -> dict:
             "author_name": authorName,
             "loc": authorLOC,
             "commits": 1,
+            "day": day,
         }
 
-        try:
-            if type(data[day]) is list:
-                HAS_RECORD: bool = False
-
-                record: dict
-                for record in data[day]:
-                    if record["author_email"] == authorEmail:
-                        record["loc"] += authorLOC
-                        record["commits"] += 1
-                        HAS_RECORD = True
-
-                if HAS_RECORD == True:
-                    pass
-                else:
-                    data[day].append(dataRecord)
-
-        except KeyError:
-            data[day] = []
-            data[day].append(dataRecord)
+        data.append(dataRecord)
 
     return data
 
