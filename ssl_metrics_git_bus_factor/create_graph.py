@@ -1,5 +1,9 @@
 from argparse import ArgumentParser, Namespace
 
+import pandas
+import matplotlib.pyplot as plt
+from pandas import DataFrame
+from matplotlib.figure import Figure
 
 def get_argparse() -> Namespace:
     parser: ArgumentParser = ArgumentParser(
@@ -23,6 +27,17 @@ def get_argparse() -> Namespace:
 
     return parser.parse_args()
 
+def plot_StackedBarChart(df: DataFrame, filename: str)  ->  None:
+    figure: Figure = plt.figure()
+    plt.ylabel("Number of Contributors")
+    plt.xlabel("Day Since Repo Initalization")
+    plt.title("Bus Factor")
+    plt.bar([1, 2, 3, 4, 5], [6, 7, 8, 9, 10])
+    figure.savefig(filename)
+
+def loadData(filename: str) ->  DataFrame:
+    return pandas.read_json(filename)
+
 
 def main() -> None:
     args: Namespace = get_argparse()
@@ -31,8 +46,8 @@ def main() -> None:
         print("Invalid input file type. Input file must be JSON")
         quit(1)
 
-
-
+    df: DataFrame = loadData(args.input)
+    plot_StackedBarChart(df, args.output)
 
 if __name__ == "__main__":
     main()

@@ -1,6 +1,7 @@
+from argparse import ArgumentParser, Namespace
 from json import dump, load
 from typing import Any
-from argparse import ArgumentParser, Namespace
+
 
 def get_argparse() -> Namespace:
     parser: ArgumentParser = ArgumentParser(
