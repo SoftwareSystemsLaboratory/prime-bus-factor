@@ -43,9 +43,9 @@ def plot_BarChart(df: DataFrame, filename: str) -> None:
 
     plt.ylabel("Number of Contributors")
     plt.xlabel("Days")
-    plt.title("Bus Factor")
+    plt.title("Contributor Count per Day")
 
-    plt.bar(list(data.keys()), [data[val] for val in range(lastDay)])
+    plt.bar(list(data.keys()), [data[day] for day in range(lastDay)])
     figure.savefig(filename)
 
 
