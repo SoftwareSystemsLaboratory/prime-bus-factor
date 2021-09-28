@@ -48,6 +48,18 @@ def plot_BarChart(df: DataFrame, filename: str) -> None:
     plt.bar(list(data.keys()), [data[day] for day in range(lastDay)])
     figure.savefig(filename)
 
+def plot_StackedBarChart(df: DataFrame, filename: str)  ->  None:
+    figure: Figure = plt.figure()
+
+    plt.ylabel("LOC")
+    plt.xlabel("Days")
+    plt.title("Bus Factor")
+
+    figure.savefig(filename)
+
+
+    pass
+
 
 def loadDataFrame(filename: str) -> DataFrame:
     return pandas.read_json(filename)
