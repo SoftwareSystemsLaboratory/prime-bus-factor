@@ -1,9 +1,11 @@
 from argparse import ArgumentParser, Namespace
+from typing import Any
 
-import pandas
 import matplotlib.pyplot as plt
-from pandas import DataFrame
+import pandas
 from matplotlib.figure import Figure
+from pandas import DataFrame
+
 
 def get_argparse() -> Namespace:
     parser: ArgumentParser = ArgumentParser(
@@ -27,15 +29,27 @@ def get_argparse() -> Namespace:
 
     return parser.parse_args()
 
-def plot_StackedBarChart(df: DataFrame, filename: str)  ->  None:
+
+def plot_BarChart(df: DataFrame, filename: str) -> None:
+    data: dict = {}
+    columnCount: int = df.shape[0]
+    lastDay: int = df.iloc[columnCount - 1]["day"] + 1
+
+    day: int
+    for day in range(lastDay):
+        data[day] = df[df["day"] == day]["author_email"].unique().shape[0]
+
     figure: Figure = plt.figure()
+
     plt.ylabel("Number of Contributors")
-    plt.xlabel("Day Since Repo Initalization")
+    plt.xlabel("Days")
     plt.title("Bus Factor")
-    plt.bar([1, 2, 3, 4, 5], [6, 7, 8, 9, 10])
+
+    plt.bar(list(data.keys()), [data[val] for val in range(lastDay)])
     figure.savefig(filename)
 
-def loadData(filename: str) ->  DataFrame:
+
+def loadDataFrame(filename: str) -> DataFrame:
     return pandas.read_json(filename)
 
 
@@ -46,8 +60,9 @@ def main() -> None:
         print("Invalid input file type. Input file must be JSON")
         quit(1)
 
-    df: DataFrame = loadData(args.input)
-    plot_StackedBarChart(df, args.output)
+    json: Any = loadDataFrame(args.input)
+    plot_BarChart(json, args.output)
+
 
 if __name__ == "__main__":
     main()
