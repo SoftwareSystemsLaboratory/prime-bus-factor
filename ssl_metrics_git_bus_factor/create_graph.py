@@ -1,5 +1,6 @@
 from argparse import ArgumentParser, Namespace
 from typing import Any
+from matplotlib import figure
 
 import matplotlib.pyplot as plt
 import pandas
@@ -29,8 +30,17 @@ def get_argparse() -> Namespace:
 
     return parser.parse_args()
 
-def plot_StackedBarChart(df: DataFrame, filename: str)  ->  None:
-    pass
+def plot_GroupedBarChart(df: DataFrame, numberOfStacks: int, filename: str, barWidth: int = 0.2)  ->  None:
+    rows: int = df.shape[0]
+
+    figure = plt.figure()
+
+    try:
+        plt.bar(1, 10)
+    except KeyError:
+        pass
+
+    plt.savefig(filename)
 
 
 def loadDataFrame(filename: str) -> DataFrame:
@@ -45,7 +55,7 @@ def main() -> None:
         quit(1)
 
     json: Any = loadDataFrame(args.input)
-
+    plot_GroupedBarChart(json, 0, args.output)
 
 if __name__ == "__main__":
     main()
