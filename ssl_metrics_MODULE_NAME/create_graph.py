@@ -1,5 +1,6 @@
 from argparse import ArgumentParser, Namespace
 
+
 def get_argparse() -> Namespace:
     parser: ArgumentParser = ArgumentParser(
         prog="PROGRAM NAME",
@@ -14,13 +15,15 @@ def get_argparse() -> Namespace:
     )
 
     return parser.parse_args()
-  
+
+
 def main() -> None:
     args: Namespace = get_argparse()
 
     if args.input[-5::] != ".json":
         print("Invalid input file type. Input file must be JSON")
         quit(1)
+
 
 if __name__ == "__main__":
     main()
