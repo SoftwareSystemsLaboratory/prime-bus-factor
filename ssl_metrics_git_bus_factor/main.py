@@ -31,7 +31,7 @@ def loadJSON(filename: str) -> list:
     with open(file=filename, mode="r") as file:
         return load(file)
 
-def buildBusFactorV2(commits: list) ->  DataFrame:
+def buildBusFactor(commits: list) ->  DataFrame:
     maxDays: int = commits[-1]["day_since_0"]
     data: list = []
 
@@ -55,35 +55,6 @@ def buildBusFactorV2(commits: list) ->  DataFrame:
 
     return DataFrame(data)
 
-def buildBusFactor(commits: list) -> list:
-    data: list = []
-
-    commit: dict
-    for commit in commits:
-        day: int = commit["day_since_0"]
-        authorName: str = commit["author_name"]
-        authorEmail: str = commit["author_email"]
-        authorLOC: int = abs(commit["delta_loc"])
-
-        dataRecord: dict = {
-            "author_email": authorEmail,
-            "author_name": authorName,
-            "loc": authorLOC,
-            "commits": 1,
-            "day": day,
-        }
-
-        data.append(dataRecord)
-
-    return data
-
-
-def dumpJSON(json: Any, filename: str) -> None:
-    with open(file=filename, mode="w") as file:
-        dump(json, file)
-        file.close()
-
-
 def main() -> None:
     args: Namespace = get_argparse()
 
@@ -92,16 +63,8 @@ def main() -> None:
         quit(1)
 
     data: list = loadJSON(filename=args.input)
-    bf: dict = buildBusFactor(data)
-    dumpJSON(bf, args.output)
-
-    buildBusFactorV2(data)
-
+    df: DataFrame = buildBusFactor(commits=data)
+    df.to_json(args.output)
 
 if __name__ == "__main__":  # maxDataRecords: int = 0
-    # for item in data:
-    #     maxlen(item))
-
-    # print(maxDataRecords)a
-
-    main()
+       main()
