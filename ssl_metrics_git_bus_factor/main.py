@@ -2,6 +2,8 @@ from argparse import ArgumentParser, Namespace
 from json import dump, load
 from typing import Any
 
+from pandas.core.frame import DataFrame
+
 
 def get_argparse() -> Namespace:
     parser: ArgumentParser = ArgumentParser(
@@ -29,6 +31,29 @@ def loadJSON(filename: str) -> list:
     with open(file=filename, mode="r") as file:
         return load(file)
 
+def buildBusFactorV2(commits: list) ->  DataFrame:
+    maxDays: int = commits[-1]["day_since_0"]
+    data: list = []
+
+    day: int
+    for day in range(maxDays + 1):
+        data.append({})
+
+    contributerCounter: int = 0
+    currentDay: int = 0
+    commit: dict
+    for commit in commits:
+        day: dict = commit["day_since_0"]
+
+        if day != currentDay:
+            currentDay = day
+            contributerCounter = 0
+
+        data[day][f"contributer_{contributerCounter}"] = commit["author_email"]
+        data[day][f"contributer_{contributerCounter}_loc"] = abs(commit["delta_loc"])
+        contributerCounter += 1
+
+    return DataFrame(data)
 
 def buildBusFactor(commits: list) -> list:
     data: list = []
@@ -69,6 +94,8 @@ def main() -> None:
     data: list = loadJSON(filename=args.input)
     bf: dict = buildBusFactor(data)
     dumpJSON(bf, args.output)
+
+    buildBusFactorV2(data)
 
 
 if __name__ == "__main__":  # maxDataRecords: int = 0
