@@ -29,25 +29,6 @@ def get_argparse() -> Namespace:
 
     return parser.parse_args()
 
-
-def plot_BarChart(df: DataFrame, filename: str) -> None:
-    data: dict = {}
-    columnCount: int = df.shape[0]
-    lastDay: int = df.iloc[columnCount - 1]["day"] + 1
-
-    day: int
-    for day in range(lastDay):
-        data[day] = df[df["day"] == day]["author_email"].unique().shape[0]
-
-    figure: Figure = plt.figure()
-
-    plt.ylabel("Number of Contributors")
-    plt.xlabel("Days")
-    plt.title("Contributor Count per Day")
-
-    plt.bar(list(data.keys()), [data[day] for day in range(lastDay)])
-    figure.savefig(filename)
-
 def plot_StackedBarChart(df: DataFrame, filename: str)  ->  None:
     pass
 
@@ -64,7 +45,6 @@ def main() -> None:
         quit(1)
 
     json: Any = loadDataFrame(args.input)
-    plot_BarChart(json, args.output)
 
 
 if __name__ == "__main__":
