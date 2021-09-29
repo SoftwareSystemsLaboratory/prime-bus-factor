@@ -49,15 +49,6 @@ def plot_BarChart(df: DataFrame, filename: str) -> None:
     figure.savefig(filename)
 
 def plot_StackedBarChart(df: DataFrame, filename: str)  ->  None:
-    figure: Figure = plt.figure()
-
-    plt.ylabel("LOC")
-    plt.xlabel("Days")
-    plt.title("Bus Factor")
-
-    figure.savefig(filename)
-
-
     pass
 
 
