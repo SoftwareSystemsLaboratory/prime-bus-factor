@@ -15,7 +15,7 @@ def get_argparse() -> Namespace:
 
     return parser.parse_args()
   
-  def main() -> None:
+def main() -> None:
     args: Namespace = get_argparse()
 
     if args.input[-5::] != ".json":
