@@ -26,12 +26,12 @@ def get_argparse() -> Namespace:
     )
     return parser.parse_args()
 
-
 def loadJSON(filename: str) -> list:
     with open(file=filename, mode="r") as file:
         return load(file)
 
-def buildBusFactor(commits: list) ->  DataFrame:
+
+def buildBusFactor(commits: list) -> DataFrame:
     maxDays: int = commits[-1]["day_since_0"]
     data: list = []
 
@@ -55,6 +55,7 @@ def buildBusFactor(commits: list) ->  DataFrame:
 
     return DataFrame(data)
 
+
 def main() -> None:
     args: Namespace = get_argparse()
 
@@ -66,5 +67,6 @@ def main() -> None:
     df: DataFrame = buildBusFactor(commits=data)
     df.to_json(args.output)
 
+
 if __name__ == "__main__":  # maxDataRecords: int = 0
-       main()
+    main()
