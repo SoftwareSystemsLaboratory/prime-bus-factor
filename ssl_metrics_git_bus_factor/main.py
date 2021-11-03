@@ -35,23 +35,11 @@ def buildBusFactor(commits: list) -> DataFrame:
     maxDays: int = commits[-1]["day_since_0"]
     data: list = []
 
-    day: int
-    for day in range(maxDays + 1):
-        data.append({})
-
-    contributerCounter: int = 0
-    currentDay: int = 0
-    commit: dict
     for commit in commits:
-        day: dict = commit["day_since_0"]
-
-        if day != currentDay:
-            currentDay = day
-            contributerCounter = 0
-
-        data[day][f"contributer_{contributerCounter}"] = commit["author_email"]
-        data[day][f"contributer_{contributerCounter}_loc"] = abs(commit["delta_loc"])
-        contributerCounter += 1
+        temp: dict = {}
+        temp["day"] = commit["day_since_0"]
+        temp["contributor_count"] = #TODO: FINISH ME! 
+        data.append(temp)
 
     return DataFrame(data)
 
