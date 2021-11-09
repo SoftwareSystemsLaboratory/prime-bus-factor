@@ -34,7 +34,7 @@ def buildBusFactor(df: DataFrame) -> DataFrame:
     data: list = []
 
     day: int
-    for day in daysSince0:
+    for day in range(daysSince0.max() + 1):
         temp: Dict = {}
 
         busFactor: int = len(df[df["day_since_0"] == day]["author_email"].unique())
