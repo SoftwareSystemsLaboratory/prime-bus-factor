@@ -1,5 +1,4 @@
 from argparse import ArgumentParser, Namespace
-from typing import Dict
 
 import pandas
 from pandas import DataFrame, Series
@@ -35,7 +34,7 @@ def buildBusFactor(df: DataFrame) -> DataFrame:
 
     day: int
     for day in range(daysSince0.max() + 1):
-        temp: Dict = {}
+        temp: dict = {}
 
         busFactor: int = len(df[df["day_since_0"] == day]["author_email"].unique())
 
