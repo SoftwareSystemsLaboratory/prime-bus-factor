@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="ssl-metrics-git-bus-factor",
-    packages=["ssl_metrics__git_bus_factor"],
+    packages=["ssl_metrics_git_bus_factor"],
     version=version.version(),
     description="SSL Metrics - Bus Factor Metric",
     author="Software and Systems Laboratory - Loyola University Chicago",
