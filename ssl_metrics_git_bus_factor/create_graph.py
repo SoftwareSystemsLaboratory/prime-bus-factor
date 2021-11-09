@@ -45,6 +45,20 @@ def getArgparse() -> Namespace:
         type=str,
         required=False,
     )
+    parser.add_argument(
+        "--x-window-min",
+        help="The smallest x value that will be plotted",
+        type=int,
+        required=False,
+        default=0
+    )
+    parser.add_argument(
+        "--x-window-max",
+        help="The largest x value that will be plotted",
+        type=int,
+        required=False,
+        default=-1
+    )
     return parser.parse_args()
 
 
@@ -75,44 +89,52 @@ def _graphFigure(
     figure: Figure = plt.figure()
     plt.suptitle(repositoryName)
 
-    # Actual Data
-    plt.subplot(2, 2, 1)
+    # Actual Data (Bar)
+    plt.subplot(1, 2, 1)
+    plt.xlabel(xlabel=xLabel)
+    plt.ylabel(ylabel=yLabel)
+    plt.title(title)
+    plt.bar(x, y)
+    plt.tight_layout()
+
+    # Actual Data (Line)
+    plt.subplot(1, 2, 2)
     plt.xlabel(xlabel=xLabel)
     plt.ylabel(ylabel=yLabel)
     plt.title(title)
     plt.plot(x, y)
     plt.tight_layout()
 
-    # Best Fit
-    plt.subplot(2, 2, 2)
-    data: tuple = __findBestFitLine(x=x, y=y, maximumDegrees=maximumDegree)
-    bfModel: np.poly1d = data[1]
-    line: np.ndarray = np.linspace(0, max(x), 100)
-    plt.ylabel(ylabel=yLabel)
-    plt.xlabel(xlabel=xLabel)
-    plt.title("Best Fit Line")
-    plt.plot(line, bfModel(line))
-    plt.tight_layout()
+    # # Best Fit
+    # plt.subplot(2, 2, 2)
+    # data: tuple = __findBestFitLine(x=x, y=y, maximumDegrees=maximumDegree)
+    # bfModel: np.poly1d = data[1]
+    # line: np.ndarray = np.linspace(0, max(x), 100)
+    # plt.ylabel(ylabel=yLabel)
+    # plt.xlabel(xlabel=xLabel)
+    # plt.title("Best Fit Line")
+    # plt.plot(line, bfModel(line))
+    # plt.tight_layout()
 
-    # Velocity of Best Fit
-    plt.subplot(2, 2, 3)
-    velocityModel = np.polyder(p=bfModel, m=1)
-    line: np.ndarray = np.linspace(0, max(x), 100)
-    plt.ylabel(ylabel="Velocity Unit")
-    plt.xlabel(xlabel=xLabel)
-    plt.title("Velocity")
-    plt.plot(line, velocityModel(line))
-    plt.tight_layout()
+    # # Velocity of Best Fit
+    # plt.subplot(2, 2, 3)
+    # velocityModel = np.polyder(p=bfModel, m=1)
+    # line: np.ndarray = np.linspace(0, max(x), 100)
+    # plt.ylabel(ylabel="Velocity Unit")
+    # plt.xlabel(xlabel=xLabel)
+    # plt.title("Velocity")
+    # plt.plot(line, velocityModel(line))
+    # plt.tight_layout()
 
-    # Acceleration of Best Fit
-    plt.subplot(2, 2, 4)
-    accelerationModel = np.polyder(p=bfModel, m=2)
-    line: np.ndarray = np.linspace(0, max(x), 100)
-    plt.ylabel(ylabel="Acceleration Unit")
-    plt.xlabel(xlabel=xLabel)
-    plt.title("Acceleration")
-    plt.plot(line, accelerationModel(line))
-    plt.tight_layout()
+    # # Acceleration of Best Fit
+    # plt.subplot(2, 2, 4)
+    # accelerationModel = np.polyder(p=bfModel, m=2)
+    # line: np.ndarray = np.linspace(0, max(x), 100)
+    # plt.ylabel(ylabel="Acceleration Unit")
+    # plt.xlabel(xlabel=xLabel)
+    # plt.title("Acceleration")
+    # plt.plot(line, accelerationModel(line))
+    # plt.tight_layout()
 
     figure.savefig(filename)
     figure.clf()
@@ -146,19 +168,28 @@ def main() -> None:
     if args.input[-5::] != ".json":
         print("Invalid input file type. Input file must be JSON")
         quit(1)
+    if args.x_window_min < 0:
+        print("Invalid x window min. X window min >= 0")
+        quit(2)
 
-    xLabel: str = "Commit"
-    yLabel: str = "LOC"
-    title: str = "Bus Factor / Days"
+    xLabel: str = "Days Since Initial Commit"
+    yLabel: str = "Bus Factor"
+    title: str = "Bus Factor / Days Since Initial Commit"
 
     df: DataFrame = pandas.read_json(args.input)
-    x: list = [x for x in range(len(df["kloc"]))]
-    yLoc: list = df["loc_sum"].tolist()
 
-    if args.graph_loc_filename != None:
+    if args.x_window_max <= -1:
+        x: list = df["days_since_0"].to_list()[args.x_window_min:]
+        y: list = df["bus_factor"].tolist()[args.x_window_min:]
+    else:
+        x: list = df["days_since_0"].to_list()[args.x_window_min:args.x_window_max + 1]
+        y: list = df["bus_factor"].tolist()[args.x_window_min:args.x_window_max + 1]
+
+
+    if args.output != None:
         plot(
             x=x,
-            y=yLoc,
+            y=y,
             xLabel=xLabel,
             yLabel=yLabel,
             title=title,
