@@ -12,9 +12,9 @@ from sklearn.metrics import r2_score
 
 def getArgparse() -> Namespace:
     parser: ArgumentParser = ArgumentParser(
-        prog="ssl-metrics-git-commits-loc Graph Generator",
-        usage="This is a proof of concept demonstrating that it is possible to use git to extract various Lines of Code (LOC) data from a repository and graph various metrics from it.",
-        description="The only required arguement of this program is -i/--input. The default action is to do nothing until filenames for LOC, ΔLOC, and KLOC are specified."
+        prog="ssl-metrics-git-bus-factor Graph Generator",
+        usage="This is a proof of concept demonstrating that it is possible to use git to compute the bus factor of a project.",
+        description="The only required arguement of this program is -i/--input. The default action is to do nothing until a filename for the graph is inputted."
     )
     parser.add_argument(
         "-i",
@@ -24,23 +24,9 @@ def getArgparse() -> Namespace:
         required=True,
     )
     parser.add_argument(
-        "-l",
-        "--graph-loc-filename",
-        help="The filename to output the LOC graph to",
-        type=str,
-        required=False,
-    )
-    parser.add_argument(
-        "-d",
-        "--graph-delta-loc-filename",
-        help="The filename to output the ΔLOC graph to",
-        type=str,
-        required=False,
-    )
-    parser.add_argument(
-        "-k",
-        "--graph-k-loc-filename",
-        help="The filename to output the K LOC graph to",
+        "-o",
+        "--output",
+        help="The filename to output the bus factor graph to",
         type=str,
         required=False,
     )
@@ -161,61 +147,24 @@ def main() -> None:
         print("Invalid input file type. Input file must be JSON")
         quit(1)
 
-    locXLabel: str = "Commit"
-    locYLabel: str = "LOC"
-    locTitle: str = "Lines of Code (LOC) / Commits"
-
-    dlocXLabel: str = locXLabel
-    dlocYLabel: str = "ΔLOC"
-    dlocTitle: str = "Change of Lines of Code (ΔLOC) / Days"
-
-    klocXLabel: str = locXLabel
-    klocYLabel: str = "KLOC"
-    klocTitle: str = "Thousands of Lines of Code (KLOC) / Days"
+    xLabel: str = "Commit"
+    yLabel: str = "LOC"
+    title: str = "Bus Factor / Days"
 
     df: DataFrame = pandas.read_json(args.input)
     x: list = [x for x in range(len(df["kloc"]))]
     yLoc: list = df["loc_sum"].tolist()
-    yDLoc: list = df["delta_loc"].tolist()
-    yKLoc: list = df["kloc"].to_list()
 
     if args.graph_loc_filename != None:
-        # LOC
         plot(
             x=x,
             y=yLoc,
-            xLabel=locXLabel,
-            yLabel=locYLabel,
-            title=locTitle,
+            xLabel=xLabel,
+            yLabel=yLabel,
+            title=title,
             maximumDegree=args.maximum_degree_polynomial,
             repositoryName=args.repository_name,
-            filename=args.graph_loc_filename,
-        )
-
-    if args.graph_delta_loc_filename != None:
-        # DLOC
-        plot(
-            x=x,
-            y=yDLoc,
-            xLabel=dlocXLabel,
-            yLabel=dlocYLabel,
-            title=dlocTitle,
-            maximumDegree=args.maximum_degree_polynomial,
-            repositoryName=args.repository_name,
-            filename=args.graph_delta_loc_filename,
-        )
-
-    if args.graph_k_loc_filename != None:
-        # KLOC
-        plot(
-            x=x,
-            y=yKLoc,
-            xLabel=klocXLabel,
-            yLabel=klocYLabel,
-            title=klocTitle,
-            maximumDegree=args.maximum_degree_polynomial,
-            repositoryName=args.repository_name,
-            filename=args.graph_k_loc_filename,
+            filename=args.output,
         )
 
 
