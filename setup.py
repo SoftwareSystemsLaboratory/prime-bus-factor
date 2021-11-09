@@ -1,15 +1,15 @@
 from setuptools import setup
 
-from ssl_metrics_MODULE_NAME import version
+from ssl_metrics_git_bus_factor import version
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="ssl-metrics-MODULE-NAME",
-    packages=["ssl_metrics_MODULE_NAME"],
+    name="ssl-metrics-git-bus-factor",
+    packages=["ssl_metrics__git_bus_factor"],
     version=version.version(),
-    description="SSL Metrics - SHORT DESCRIPTION",
+    description="SSL Metrics - Bus Factor Metric",
     author="Software and Systems Laboratory - Loyola University Chicago",
     author_email="ssl-metrics@ssl.luc.edu",
     license="BSD",
@@ -17,8 +17,8 @@ setup(
     long_description_content_type="text/markdown",
     url="https://ssl.cs.luc.edu/projects/metricsDashboard",
     project_urls={
-        "Bug Tracker": "https://github.com/SoftwareSystemsLaboratory/ssl-metrics-REPOSITORY-NAME/issues",
-        "GitHub Repository": "https://github.com/SoftwareSystemsLaboratory/ssl-metrics-REPOSITORY-NAME",
+        "Bug Tracker": "https://github.com/SoftwareSystemsLaboratory/ssl-metrics-bus-factor/issues",
+        "GitHub Repository": "https://github.com/SoftwareSystemsLaboratory/ssl-metrics-bus-factor",
     },
     keywords=[
         "git",
@@ -48,12 +48,15 @@ setup(
     ],
     python_requires=">=3.9",
     install_requires=[
-        # ADD ME
+        "matplotlib>=3.4.3",
+        "numpy>=1.21.2",
+        "pandas>=1.3.3",
+        "scikit-learn>=1.0.1",
     ],
     entry_points={
         "console_scripts": [
-            "ssl-metrics-MODULE-NAME-collect = ssl_metrics_MODULE_NAME.FILENAME:main",
-            "ssl-metrics-MODULE-NAME-graph = ssl_metrics_MODULE_NAME.create_graph:main",
+            "ssl-metrics-git-bus-factor-collect = ssl_metrics_git_bus_factor.main:main",
+            "ssl-metrics-git-bus-factor-graph = ssl_metrics_git_bus_factor.create_graph:main",
         ]
     },
 )
