@@ -1,44 +1,47 @@
 from argparse import ArgumentParser, Namespace
-from json import dump, load
-from typing import Any
+from typing import Dict
 
-from pandas.core.frame import DataFrame
+import pandas
+from pandas import DataFrame, Series
 
 
 def get_argparse() -> Namespace:
     parser: ArgumentParser = ArgumentParser(
-        prog="SSL Metrics - Bus Factor Calculator",
-        usage="Takes a JSON file of commits as an input and returns the bus factor of commits for each day that the project exists.",
+        prog="SSL Metrics Bus Factor Computer",
+        usage="Computes the bus factor per day",
+        description="Computes the bus factor per day using the output of ssl-metrics-git-commit-loc-extract",
     )
     parser.add_argument(
         "-i",
         "--input",
-        help="The input JSON file that is to be used for calculating the bus factor",
+        help="JSON file outputted from ssl-metrics-git-commits-loc-extract to be used to calculate bus factor",
         type=str,
         required=True,
     )
     parser.add_argument(
         "-o",
         "--output",
-        help="The bus factor output JSON",
+        help="JSON file that will contain the bus factor metric information",
         type=str,
         required=True,
     )
     return parser.parse_args()
 
-def loadJSON(filename: str) -> list:
-    with open(file=filename, mode="r") as file:
-        return load(file)
 
+def buildBusFactor(df: DataFrame) -> DataFrame:
+    daysSince0: Series = df["day_since_0"].unique()
 
-def buildBusFactor(commits: list) -> DataFrame:
-    maxDays: int = commits[-1]["day_since_0"]
     data: list = []
 
-    for commit in commits:
-        temp: dict = {}
-        temp["day"] = commit["day_since_0"]
-        temp["contributor_count"] = #TODO: FINISH ME! 
+    day: int
+    for day in daysSince0:
+        temp: Dict = {}
+
+        busFactor: int = len(df[df["day_since_0"] == day]["author_email"].unique())
+
+        temp["days_since_0"] = day
+        temp["bus_factor"] = busFactor
+
         data.append(temp)
 
     return DataFrame(data)
@@ -51,10 +54,11 @@ def main() -> None:
         print("Invalid input file type. Input file must be JSON")
         quit(1)
 
-    data: list = loadJSON(filename=args.input)
-    df: DataFrame = buildBusFactor(commits=data)
-    df.to_json(args.output)
+    dfIn: DataFrame = pandas.read_json(args.input)
+    dfOut: DataFrame = buildBusFactor(df=dfIn)
+
+    dfOut.to_json(args.output)
 
 
-if __name__ == "__main__":  # maxDataRecords: int = 0
+if __name__ == "__main__":
     main()
