@@ -90,20 +90,20 @@ def _graphFigure(
     plt.suptitle(repositoryName)
 
     # Actual Data (Bar)
-    plt.subplot(1, 2, 1)
+    # plt.subplot(1, 2, 1)
     plt.xlabel(xlabel=xLabel)
     plt.ylabel(ylabel=yLabel)
     plt.title(title)
     plt.bar(x, y)
     plt.tight_layout()
 
-    # Actual Data (Line)
-    plt.subplot(1, 2, 2)
-    plt.xlabel(xlabel=xLabel)
-    plt.ylabel(ylabel=yLabel)
-    plt.title(title)
-    plt.plot(x, y)
-    plt.tight_layout()
+    # # Actual Data (Line)
+    # plt.subplot(1, 2, 2)
+    # plt.xlabel(xlabel=xLabel)
+    # plt.ylabel(ylabel=yLabel)
+    # plt.title(title)
+    # plt.plot(x, y)
+    # plt.tight_layout()
 
     # # Best Fit
     # plt.subplot(2, 2, 2)
@@ -174,7 +174,7 @@ def main() -> None:
 
     xLabel: str = "Days Since Initial Commit"
     yLabel: str = "Bus Factor"
-    title: str = "Bus Factor / Days Since Initial Commit"
+    title: str = "Bus Factor / Days"
 
     df: DataFrame = pandas.read_json(args.input)
 
