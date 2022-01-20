@@ -42,7 +42,6 @@ setup(
         "Programming Language :: Python :: 3 :: Only",
         "Topic :: Software Development",
         "Topic :: Scientific/Engineering",
-        "Operating System :: Microsoft :: Windows",
         "Operating System :: POSIX",
         "Operating System :: Unix",
         "Operating System :: MacOS",
