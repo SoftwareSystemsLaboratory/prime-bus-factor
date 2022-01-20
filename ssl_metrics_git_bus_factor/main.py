@@ -28,7 +28,7 @@ def get_argparse() -> Namespace:
 
 
 def buildBusFactor(df: DataFrame) -> DataFrame:
-    daysSince0: Series = df["day_since_0"].unique()
+    daysSince0: Series = df["days_since_0"].unique()
 
     data: list = []
 
@@ -36,13 +36,12 @@ def buildBusFactor(df: DataFrame) -> DataFrame:
     for day in range(daysSince0.max() + 1):
         temp: dict = {}
 
-        busFactor: int = len(df[df["day_since_0"] == day]["author_email"].unique())
+        busFactor: int = len(df[df["days_since_0"] == day]["author_email"].unique())
 
         temp["days_since_0"] = day
         temp["bus_factor"] = busFactor
 
-        data.append(temp)
-
+        data.append(temp) 
     return DataFrame(data)
 
 
