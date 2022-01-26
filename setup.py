@@ -21,15 +21,27 @@ setup(
         "GitHub Repository": "https://github.com/SoftwareSystemsLaboratory/ssl-metrics-bus-factor",
     },
     keywords=[
+        "bus factor",
+        "commits",
+        "engineering",
         "git",
         "github",
-        "software engineering",
-        "metrics",
-        "software systems laboratory",
-        "ssl",
+        "issue density",
+        "issues",
+        "kloc",
         "loyola",
         "loyola university chicago",
         "luc",
+        "mining",
+        "metrics",
+        "repository",
+        "repository mining",
+        "simple",
+        "software",
+        "software engineering",
+        "software metrics",
+        "software systems laboratory",
+        "ssl"
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -55,7 +67,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "ssl-metrics-git-bus-factor-collect = ssl_metrics_git_bus_factor.main:main",
+            "ssl-metrics-git-bus-factor-compute = ssl_metrics_git_bus_factor.main:main",
             "ssl-metrics-git-bus-factor-graph = ssl_metrics_git_bus_factor.create_graph:main",
         ]
     },

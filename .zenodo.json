@@ -1,0 +1,48 @@
+{
+    "upload_type": "software",
+    "title": "SoftwareSystemsLaboratory/ssl-metrics-git-bus-factor",
+    "creators": [
+        {
+        "name": "Hyatt, Matt",
+        "affiliation": "Loyola University Chicago",
+        "orcid": "0000-0002-6356-6832"
+        },
+        {
+        "name": "Synovic, Nicholas",
+        "affiliation": "Loyola University Chicago",
+        "orcid": "0000-0003-0413-4594"
+        },
+        {
+        "name": "Thiruvathukal, George K.",
+        "affiliation": "Loyola University Chicago and Argonne National Laboratory",
+        "orcid": "0000-0002-0452-5571"
+        }
+    ],
+    "description": "This is a proof of concept demonstrating that it is possible to use git commits to calcualte the bus factor of a repository.",
+    "access_right": "open",
+    "license": "BSD-3-Clause",
+    "prereserve_doi": true,
+    "keywords": [
+        "bus factor",
+        "commits",
+        "engineering",
+        "git",
+        "github",
+        "issue density",
+        "issues",
+        "kloc",
+        "loyola",
+        "loyola university chicago",
+        "luc",
+        "mining",
+        "metrics",
+        "repository",
+        "repository mining",
+        "simple",
+        "software",
+        "software engineering",
+        "software metrics",
+        "software systems laboratory",
+        "ssl"
+    ]
+}
