@@ -26,6 +26,8 @@ setup(
         "engineering",
         "git",
         "github",
+        "issue density",
+        "issues",
         "kloc",
         "loyola",
         "loyola university chicago",
