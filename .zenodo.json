@@ -1,7 +1,12 @@
 {
     "upload_type": "software",
-    "title": "SoftwareSystemsLaboratory/ssl-metrics-git-commits-loc",
+    "title": "SoftwareSystemsLaboratory/ssl-metrics-git-bus-factor",
     "creators": [
+        {
+        "name": "Hyatt, Matt",
+        "affiliation": "Loyola University Chicago",
+        "orcid": "0000-0002-6356-6832"
+        },
         {
         "name": "Synovic, Nicholas",
         "affiliation": "Loyola University Chicago",
