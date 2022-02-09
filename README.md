@@ -1,6 +1,6 @@
 # Software Systems Laboratory Metrics Git Bus Factor
 
-> A tool to calculate the bus factor of a repository
+> A `python` tool to calculate the bus factor of a `git` repository
 
 ![[https://img.shields.io/badge/python-3.9.6%20%7C%203.10-blue](https://img.shields.io/badge/python-3.9.6%20%7C%203.10-blue)](https://img.shields.io/badge/python-3.9.6%20%7C%203.10-blue)
 ![[https://img.shields.io/badge/DOI-Example-red](https://img.shields.io/badge/DOI-Example-red)](https://img.shields.io/badge/DOI-Example-red)
