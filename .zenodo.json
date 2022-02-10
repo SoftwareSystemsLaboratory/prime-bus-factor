@@ -1,31 +1,11 @@
 {
     "upload_type": "software",
-    "title": "SoftwareSystemsLaboratory/ssl-metrics",
+    "title": "SoftwareSystemsLaboratory/ssl-metrics-git-bus-factor",
     "creators": [
         {
         "name": "Hyatt, Matt",
         "affiliation": "Loyola University Chicago",
         "orcid": "0000-0002-6356-6832"
-        },
-        {
-        "name": "Kuhl, Amy",
-        "affiliation": "Loyola University Chicago",
-        "orcid": "0000-0001-7586-7408"
-        },
-        {
-        "name": "Palmer, Jake",
-        "affiliation": "Loyola University Chicago",
-        "orcid": "0000-0003-4586-5369"
-        },
-        {
-        "name": "Sethi, Rohan",
-        "affiliation": "Loyola University Chicago",
-        "orcid": "0000-0002-9587-3722"
-        },
-        {
-        "name": "Stoneman, Ethan",
-        "affiliation": "Loyola University Chicago",
-        "orcid": "0000-0001-7702-8261"
         },
         {
         "name": "Synovic, Nicholas",
@@ -43,7 +23,7 @@
         "orcid": "0000-0002-0452-5571"
         }
     ],
-    "description": "A helper package to install all Software Systems Laboratory Metrics tools",
+    "description": "A python tool to calculate the bus factor of a git repository",
     "access_right": "open",
     "license": "BSD-3-Clause",
     "prereserve_doi": true,
