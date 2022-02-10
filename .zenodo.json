@@ -13,12 +13,17 @@
         "orcid": "0000-0003-0413-4594"
         },
         {
+        "name": "Thota, Sohini",
+        "affiliation": "Loyola University Chicago",
+        "orcid": "0000-0002-3496-8867"
+        },
+        {
         "name": "Thiruvathukal, George K.",
         "affiliation": "Loyola University Chicago and Argonne National Laboratory",
         "orcid": "0000-0002-0452-5571"
         }
     ],
-    "description": "This is a proof of concept demonstrating that it is possible to use git commits to calcualte the bus factor of a repository.",
+    "description": "A python tool to calculate the bus factor of a git repository",
     "access_right": "open",
     "license": "BSD-3-Clause",
     "prereserve_doi": true,
