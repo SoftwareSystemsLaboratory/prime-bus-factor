@@ -10,7 +10,7 @@ authors: list = [
 
 def mainArgs() -> Namespace:
     parser: ArgumentParser = ArgumentParser(
-        prog=f"{name} Repository Bus Factor Calculator",
+        prog=f"{name} Bus Factor Calculator",
         description="A tool to calculate the bus factor of a Git repository",
         epilog=f"Author(s): {', '.join(authors)}",
     )
@@ -35,7 +35,7 @@ def mainArgs() -> Namespace:
 
 def graphArgs() -> Namespace:
     parser: ArgumentParser = ArgumentParser(
-        prog=f"{name} Bus Factor  Grapher",
+        prog=f"{name} Bus Factor Grapher",
         description="A tool to graph the bus factor of a repository",
         epilog=f"Author(s): {', '.join(authors)}",
     )
