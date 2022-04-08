@@ -4,9 +4,6 @@ import pandas
 from pandas import DataFrame, Series
 
 
-
-
-
 def buildBusFactor(df: DataFrame) -> DataFrame:
     daysSince0: Series = df["days_since_0"].unique()
 
