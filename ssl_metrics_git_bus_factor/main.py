@@ -17,7 +17,7 @@ def buildBusFactor(df: DataFrame) -> DataFrame:
         busFactor: int = len(df[df["author_days_since_0"] == day]["author_email"].unique())
 
         temp["days_since_0"] = day
-        temp["bus_factor"] = busFactor
+        temp["productivity"] = busFactor
 
         data.append(temp)
 
@@ -27,7 +27,7 @@ def buildBusFactor(df: DataFrame) -> DataFrame:
 def main() -> None:
     args: Namespace = mainArgs()
 
-    df: DataFrame = pandas.read_json(args.input)
+    df: DataFrame = pandas.read_json(args.input).T
     buildBusFactor(df).to_json(args.output)
 
 
