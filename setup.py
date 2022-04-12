@@ -68,7 +68,7 @@ setup(
     entry_points={
         "console_scripts": [
             "ssl-metrics-git-bus-factor-compute = ssl_metrics_git_bus_factor.main:main",
-            "ssl-metrics-git-bus-factor-graph = ssl_metrics_git_bus_factor.create_graph:main",
+            "ssl-metrics-git-bus-factor-graph = ssl_metrics_git_bus_factor.graph:main",
         ]
     },
 )

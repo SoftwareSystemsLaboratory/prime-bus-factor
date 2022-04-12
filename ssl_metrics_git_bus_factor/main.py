@@ -1,34 +1,12 @@
-from argparse import ArgumentParser, Namespace
+from argparse import Namespace
 
 import pandas
 from pandas import DataFrame, Series
 
-
-def get_argparse() -> Namespace:
-    parser: ArgumentParser = ArgumentParser(
-        prog="SSL Metrics Bus Factor Computer",
-        usage="Computes the bus factor per day",
-        description="Computes the bus factor per day using the output of ssl-metrics-git-commit-loc-extract",
-    )
-    parser.add_argument(
-        "-i",
-        "--input",
-        help="JSON file outputted from ssl-metrics-git-commits-loc-extract to be used to calculate bus factor",
-        type=str,
-        required=True,
-    )
-    parser.add_argument(
-        "-o",
-        "--output",
-        help="JSON file that will contain the bus factor metric information",
-        type=str,
-        required=True,
-    )
-    return parser.parse_args()
-
+from ssl_metrics_git_bus_factor.args import mainArgs
 
 def buildBusFactor(df: DataFrame) -> DataFrame:
-    daysSince0: Series = df["days_since_0"].unique()
+    daysSince0: Series = df["author_days_since_0"].unique()
 
     data: list = []
 
@@ -36,26 +14,21 @@ def buildBusFactor(df: DataFrame) -> DataFrame:
     for day in range(daysSince0.max() + 1):
         temp: dict = {}
 
-        busFactor: int = len(df[df["days_since_0"] == day]["author_email"].unique())
+        busFactor: int = len(df[df["author_days_since_0"] == day]["author_email"].unique())
 
         temp["days_since_0"] = day
-        temp["bus_factor"] = busFactor
+        temp["productivity"] = busFactor
 
-        data.append(temp) 
+        data.append(temp)
+
     return DataFrame(data)
 
 
 def main() -> None:
-    args: Namespace = get_argparse()
+    args: Namespace = mainArgs()
 
-    if args.input[-5::] != ".json":
-        print("Invalid input file type. Input file must be JSON")
-        quit(1)
-
-    dfIn: DataFrame = pandas.read_json(args.input)
-    dfOut: DataFrame = buildBusFactor(df=dfIn)
-
-    dfOut.to_json(args.output)
+    df: DataFrame = pandas.read_json(args.input).T
+    buildBusFactor(df).to_json(args.output)
 
 
 if __name__ == "__main__":
