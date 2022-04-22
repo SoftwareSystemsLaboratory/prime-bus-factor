@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import pandas
 from pandas import DataFrame
 
-from ssl_metrics_git_bus_factor.args import graphArgs
-
+from clime_bus_factor.args import graphArgs
+from clime_bus_factor.version import version
 
 def plot(
     x: list,
@@ -38,6 +38,10 @@ def plot(
 
 def main() -> None:
     args: Namespace = graphArgs()
+
+    if args.version:
+        print(f"clime-bus-factor-graph version {version()}")
+        quit(0)
 
     df: DataFrame = pandas.read_json(args.input)
 

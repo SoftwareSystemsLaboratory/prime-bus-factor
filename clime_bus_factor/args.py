@@ -18,7 +18,7 @@ def mainArgs() -> Namespace:
     parser.add_argument(
         "-i",
         "--input",
-        type=open,
+        type=str,
         help="Commits JSON file. DEFAULT: ./commits_loc.json",
         default="commits_loc.json",
     )
@@ -28,6 +28,13 @@ def mainArgs() -> Namespace:
         help="Output JSON file. DEFAULT: ./bus_factor.json",
         type=str,
         default="bus_factor.json",
+    )
+    parser.add_argument(
+        "-v",
+        "--version",
+        help="Display version of the tool",
+        action="store_true",
+        default=False,
     )
 
     return parser.parse_args()
@@ -90,6 +97,13 @@ def graphArgs() -> Namespace:
         type=str,
         required=False,
         default="",
+    )
+    parser.add_argument(
+        "-v",
+        "--version",
+        help="Display version of the tool",
+        action="store_true",
+        default=False,
     )
 
     return parser.parse_args()

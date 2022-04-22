@@ -1,6 +1,6 @@
 {
     "upload_type": "software",
-    "title": "SoftwareSystemsLaboratory/ssl-metrics-git-bus-factor",
+    "title": "SoftwareSystemsLaboratory/clime-bus-factor",
     "creators": [
         {
         "name": "Hyatt, Matt",
@@ -23,26 +23,5 @@
     "license": "BSD-3-Clause",
     "prereserve_doi": true,
     "keywords": [
-        "bus factor",
-        "commits",
-        "engineering",
-        "git",
-        "github",
-        "issue density",
-        "issues",
-        "kloc",
-        "loyola",
-        "loyola university chicago",
-        "luc",
-        "mining",
-        "metrics",
-        "repository",
-        "repository mining",
-        "simple",
-        "software",
-        "software engineering",
-        "software metrics",
-        "software systems laboratory",
-        "ssl"
     ]
 }
