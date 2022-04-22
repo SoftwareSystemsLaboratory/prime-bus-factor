@@ -50,7 +50,7 @@ def graphArgs() -> Namespace:
     parser.add_argument(
         "-i",
         "--input",
-        help=f"JSON export from {name} GitHub Bus Factor Compute. DEFAULT: ./bus_factor.json",
+        help=f"JSON export from clime-git-bus-factor-compute. DEFAULT: ./bus_factor.json",
         type=str,
         required=False,
         default="bus_factor.json",
