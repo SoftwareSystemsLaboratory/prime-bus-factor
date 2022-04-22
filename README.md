@@ -1,5 +1,8 @@
 # CLIME Bus Factor
 
+[![DOI](https://zenodo.org/badge/407346377.svg)](https://zenodo.org/badge/latestdoi/407346377)
+[![Release Project](https://github.com/SoftwareSystemsLaboratory/clime-bus-factor/actions/workflows/release.yml/badge.svg)](https://github.com/SoftwareSystemsLaboratory/clime-bus-factor/actions/workflows/release.yml)
+
 > A tool to calculate the bus factor metric of a Git repository
 
 ## Table of Contents
@@ -62,7 +65,7 @@ A tool to graph the bus factor of a repository
 options:
   -h, --help            show this help message and exit
   -i INPUT, --input INPUT
-                        JSON export from CLIME GitHub Bus Factor Compute.
+                        JSON export from clime-git-bus-factor-compute.
                         DEFAULT: ./bus_factor.json
   -o OUTPUT, --output OUTPUT
                         Filename of the graph. DEFAULT: ./bus_factor.pdf
