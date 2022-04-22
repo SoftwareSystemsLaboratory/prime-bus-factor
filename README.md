@@ -1,38 +1,24 @@
-# Software Systems Laboratory Metrics Git Bus Factor
+# CLIME Bus Factor
 
-> A `python` tool to calculate the bus factor of a `git` repository
-
-![[https://img.shields.io/badge/python-3.9.6%20%7C%203.10-blue](https://img.shields.io/badge/python-3.9.6%20%7C%203.10-blue)](https://img.shields.io/badge/python-3.9.6%20%7C%203.10-blue)
-[![DOI](https://zenodo.org/badge/407346377.svg)](https://zenodo.org/badge/latestdoi/407346377)
-[![Release Project](https://github.com/SoftwareSystemsLaboratory/ssl-metrics-git-bus-factor/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/SoftwareSystemsLaboratory/ssl-metrics-git-bus-factor/actions/workflows/release.yml)
-[![LICENSE](https://img.shields.io/badge/license-BSD--3-yellow)](https://github.com/SoftwareSystemsLaboratory/ssl-metrics-git-bus-factor/blob/main/LICENSE)
+> A tool to calculate the bus factor metric of a Git repository
 
 ## Table of Contents
 
-- [Software Systems Laboratory Metrics Git Bus Factor](#software-systems-laboratory-metrics-git-bus-factor)
+- [CLIME Bus Factor](#clime-bus-factor)
   - [Table of Contents](#table-of-contents)
   - [About](#about)
-  - [Developer Tooling](#developer-tooling)
-    - [Operating System](#operating-system)
+    - [Licensing](#licensing)
   - [How To Use](#how-to-use)
     - [Installation](#installation)
-    - [Command Line Arguments](#command-line-arguments)
+    - [Command Line Options](#command-line-options)
 
 ## About
 
-The Software Systems Laboratory (SSL) Git Bus Factor Project is a `python` tool that lets users calculate and graph the bus facto of a `git` repository. This tool relies on the output of the [Git Commits LOC](https://github.com/SoftwareSystemsLaboratory/ssl-metrics-git-commits-loc) project.
+The Software Systems Laboratory (SSL) CLIME Bus Factor project is a tool to calculate the bus factor metric of a Git repository. This tool relies on the output of the [CLIME Commits tool](https://github.com/SoftwareSystemsLaboratory/clime-commits).
+
+### Licensing
 
 This project is licensed under the BSD-3-Clause. See the [LICENSE](LICENSE) for more information.
-
-## Developer Tooling
-
-To maximize the utility of this project and the greater SSL Metrics project, the following software packages are **required**:
-
-### Operating System
-
-All tools developed for the greater SSL Metrics project **must target** Mac OS and Linux. SSL Metrics software is not supported or recommended to run on Windows *but can be modified to do so at your own risk*.
-
-It is recomendded to develop on Mac OS or Linux. However, if you are on a Windows machine, you can use WSL to develop as well.
 
 ## How To Use
 
@@ -40,37 +26,53 @@ It is recomendded to develop on Mac OS or Linux. However, if you are on a Window
 
 You can install the tool via `pip` with either of the two following one-liners:
 
-- `pip install --upgrade pip ssl-metrics-meta`
-- `pip install --upgrade pip ssl-metrics-git-bus-factor`
+- `pip install --upgrade pip clime-metrics`
+- `pip install --upgrade pip clime-bus-factor`
 
-### Command Line Arguments
+### Command Line Options
 
-`ssl-metrics-git-bus-factor-compute -h`
+`clime-git-bus-factor-compute -h`
 
-```shell
+``` shell
+usage: CLIME Bus Factor Calculator [-h] [-i INPUT] [-o OUTPUT] [-v]
+
+A tool to calculate the bus factor of a Git repository
+
 options:
   -h, --help            show this help message and exit
   -i INPUT, --input INPUT
-                        JSON file outputted from ssl-metrics-git-commits-loc-extract to be used to calculate bus factor
+                        Commits JSON file. DEFAULT: ./commits_loc.json
   -o OUTPUT, --output OUTPUT
-                        JSON file that will contain the bus factor metric information
+                        Output JSON file. DEFAULT: ./bus_factor.json
+  -v, --version         Display version of the tool
+
+Author(s): Nicholas M. Synovic, Matthew Hyatt, George K. Thiruvathukal
 ```
 
-`ssl-metrics-git-bus-factor-graph -h`
+`clime-git-bus-factor-graph -h`
 
-```shell
+``` shell
+usage: CLIME Bus Factor Grapher [-h] [-i INPUT] [-o OUTPUT] [--type TYPE]
+                                [--title TITLE] [--x-label X_LABEL]
+                                [--y-label Y_LABEL] [--stylesheet STYLESHEET]
+                                [-v]
+
+A tool to graph the bus factor of a repository
+
 options:
   -h, --help            show this help message and exit
   -i INPUT, --input INPUT
-                        The input data file that will be read to create the graphs
+                        JSON export from CLIME GitHub Bus Factor Compute.
+                        DEFAULT: ./bus_factor.json
   -o OUTPUT, --output OUTPUT
-                        The filename to output the bus factor graph to
-  -m MAXIMUM_DEGREE_POLYNOMIAL, --maximum-degree-polynomial MAXIMUM_DEGREE_POLYNOMIAL
-                        Estimated maximum degree of polynomial
-  -r REPOSITORY_NAME, --repository-name REPOSITORY_NAME
-                        Name of the repository that is being analyzed
-  --x-window-min X_WINDOW_MIN
-                        The smallest x value that will be plotted
-  --x-window-max X_WINDOW_MAX
-                        The largest x value that will be plotted
+                        Filename of the graph. DEFAULT: ./bus_factor.pdf
+  --type TYPE           Type of figure to plot. DEFAULT: line
+  --title TITLE         Title of the figure. DEFAULT: ""
+  --x-label X_LABEL     X axis label of the figure. DEFAULT: ""
+  --y-label Y_LABEL     Y axis label of the figure. DEFAULT: ""
+  --stylesheet STYLESHEET
+                        Filepath of matplotlib stylesheet to use. DEFAULT: ""
+  -v, --version         Display version of the tool
+
+Author(s): Nicholas M. Synovic, Matthew Hyatt, George K. Thiruvathukal
 ```

@@ -32,7 +32,7 @@ def main() -> None:
     args: Namespace = mainArgs()
 
     if args.version:
-        print(f"clime-bus-factor-graph version {version()}")
+        print(f"clime-git-bus-factor-compute version {version()}")
         quit(0)
 
     df: DataFrame = pandas.read_json(args.input).T

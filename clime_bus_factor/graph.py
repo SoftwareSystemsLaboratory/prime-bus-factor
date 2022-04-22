@@ -7,6 +7,7 @@ from pandas import DataFrame
 from clime_bus_factor.args import graphArgs
 from clime_bus_factor.version import version
 
+
 def plot(
     x: list,
     y: list,
@@ -40,7 +41,7 @@ def main() -> None:
     args: Namespace = graphArgs()
 
     if args.version:
-        print(f"clime-bus-factor-graph version {version()}")
+        print(f"clime-git-bus-factor-graph version {version()}")
         quit(0)
 
     df: DataFrame = pandas.read_json(args.input)

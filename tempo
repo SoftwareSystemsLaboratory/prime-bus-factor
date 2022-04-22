@@ -1,0 +1,23 @@
+usage: CLIME Bus Factor Grapher [-h] [-i INPUT] [-o OUTPUT] [--type TYPE]
+                                [--title TITLE] [--x-label X_LABEL]
+                                [--y-label Y_LABEL] [--stylesheet STYLESHEET]
+                                [-v]
+
+A tool to graph the bus factor of a repository
+
+options:
+  -h, --help            show this help message and exit
+  -i INPUT, --input INPUT
+                        JSON export from CLIME GitHub Bus Factor Compute.
+                        DEFAULT: ./bus_factor.json
+  -o OUTPUT, --output OUTPUT
+                        Filename of the graph. DEFAULT: ./bus_factor.pdf
+  --type TYPE           Type of figure to plot. DEFAULT: line
+  --title TITLE         Title of the figure. DEFAULT: ""
+  --x-label X_LABEL     X axis label of the figure. DEFAULT: ""
+  --y-label Y_LABEL     Y axis label of the figure. DEFAULT: ""
+  --stylesheet STYLESHEET
+                        Filepath of matplotlib stylesheet to use. DEFAULT: ""
+  -v, --version         Display version of the tool
+
+Author(s): Nicholas M. Synovic, Matthew Hyatt, George K. Thiruvathukal

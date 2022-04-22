@@ -16,9 +16,9 @@ authors:
   email: nsynovic@luc.edu
   affiliation: Loyola University Chicago
   orcid: 'https://orcid.org/0000-0003-0413-4594'
-  
+
 title: "SoftwareSystemsLaboratory/ssl-metrics-git-bus-factor"
-version: 0.1.1
+version: 0.3
 doi: 10.5281/zenodo.5904953
 date-released: 2022-01-26
-url: "https://github.com/SoftwareSystemsLaboratory/ssl-metrics-git-bus-factor"
+url: "https://github.com/SoftwareSystemsLaboratory/clime-bus-factor"
