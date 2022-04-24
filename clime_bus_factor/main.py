@@ -36,7 +36,7 @@ def main() -> None:
         quit(0)
 
     df: DataFrame = pandas.read_json(args.input).T
-    buildBusFactor(df).to_json(args.output)
+    buildBusFactor(df).to_json(args.output, indent=4)
 
 
 if __name__ == "__main__":
