@@ -7,10 +7,12 @@ from clime_bus_factor.args import mainArgs
 from clime_bus_factor.version import version
 
 
-def buildBusFactor(df: DataFrame) -> DataFrame:
+def buildBusFactor(df: DataFrame, bucket: int) -> DataFrame:
     daysSince0: Series = df["author_days_since_0"].unique()
 
     data: list = []
+
+    print(df.columns)
 
     day: int
     for day in range(daysSince0.max() + 1):
@@ -35,8 +37,12 @@ def main() -> None:
         print(f"clime-git-bus-factor-compute version {version()}")
         quit(0)
 
+    if args.bucket < 1:
+        print(f"Bucket arguement must be an integer greater than 0: {args.bucket}")
+        quit(1)
+
     df: DataFrame = pandas.read_json(args.input).T
-    buildBusFactor(df).to_json(args.output, indent=4)
+    buildBusFactor(df, bucket=args.bucket).to_json(args.output, indent=4)
 
 
 if __name__ == "__main__":
