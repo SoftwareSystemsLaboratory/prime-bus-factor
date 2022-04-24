@@ -48,7 +48,7 @@ def main() -> None:
 
     data: list = []
     data.append(df["days_since_0"].tolist())
-    data.append(df["productivity"].tolist())
+    data.append(df["busFactor"].tolist())
 
     plot(
         x=data[0],
