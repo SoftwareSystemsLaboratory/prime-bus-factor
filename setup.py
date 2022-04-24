@@ -59,8 +59,7 @@ setup(
         "software metrics",
         "software systems laboratory",
         "software",
-        "ssl"
-        "thousands of lines of code",
+        "ssl" "thousands of lines of code",
         "tool",
         "vcs",
     ],
