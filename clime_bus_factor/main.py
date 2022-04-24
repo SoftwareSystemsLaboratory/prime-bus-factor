@@ -1,7 +1,7 @@
 from argparse import Namespace
 
 import pandas
-from pandas import DataFrame, Series
+from pandas import Categorical, DataFrame, Interval, Series
 
 from clime_bus_factor.args import mainArgs
 from clime_bus_factor.version import version
@@ -12,18 +12,26 @@ def buildBusFactor(df: DataFrame, bucket: int) -> DataFrame:
 
     data: list = []
 
-    print(df.columns)
+    maxDays: int = daysSince0.max() + bucket
+    bucketList: list = [day for day in range(maxDays) if day % bucket == 0]
 
-    day: int
-    for day in range(daysSince0.max() + 1):
+    df["commitBin"] = pandas.cut(
+        df["author_days_since_0"], bins=bucketList, include_lowest=True
+    )
+
+    bins: Categorical = df["commitBin"].unique()
+    binList: list = bins.tolist()
+
+    bin: Interval
+    for bin in binList:
         temp: dict = {}
 
-        busFactor: int = len(
-            df[df["author_days_since_0"] == day]["author_email"].unique()
-        )
+        day: int = int(bin.left) if bin.left > 0 else 0
+
+        busFactor: int = len(df[df["commitBin"] == bin]["author_email"].unique())
 
         temp["days_since_0"] = day
-        temp["productivity"] = busFactor
+        temp["busFactor"] = busFactor
 
         data.append(temp)
 
