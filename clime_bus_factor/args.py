@@ -30,6 +30,13 @@ def mainArgs() -> Namespace:
         default="bus_factor.json",
     )
     parser.add_argument(
+        "-b",
+        "--bucket",
+        help="Bucket containing the number of days between computed bus factor values. DEFAULT: 1",
+        type=int,
+        default=int,
+    )
+    parser.add_argument(
         "-v",
         "--version",
         help="Display version of the tool",
