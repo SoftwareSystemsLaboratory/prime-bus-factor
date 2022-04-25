@@ -31,8 +31,8 @@ def mainArgs() -> Namespace:
     )
     parser.add_argument(
         "-b",
-        "--bucket",
-        help="Bucket containing the number of days between computed bus factor values. DEFAULT: 1",
+        "--bin",
+        help="Bin containing the number of days between computed bus factor values. DEFAULT: 1",
         type=int,
         default=1,
     )
