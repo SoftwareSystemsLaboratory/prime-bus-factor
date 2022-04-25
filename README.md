@@ -75,6 +75,9 @@ options:
   --y-label Y_LABEL     Y axis label of the figure. DEFAULT: ""
   --stylesheet STYLESHEET
                         Filepath of matplotlib stylesheet to use. DEFAULT: ""
+  -b BIN, --bin BIN
+                        Bin containing the number of days between computed bus
+                        factor values. DEFAULT: 1
   -v, --version         Display version of the tool
 
 Author(s): Nicholas M. Synovic, Matthew Hyatt, George K. Thiruvathukal
