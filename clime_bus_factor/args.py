@@ -1,6 +1,8 @@
 from argparse import ArgumentParser, Namespace
+from clime_bus_factor.version import version
 
-name: str = "CLIME"
+name: str = "PRiMe"
+versionName: str = "PRiMe Bus Factor Module"
 authors: list = [
     "Nicholas M. Synovic",
     "Matthew Hyatt",
@@ -35,6 +37,7 @@ def genericArgs(parser: ArgumentParser) -> None:
         "--version",
         help="Display version of the tool",
         action="version",
+        version=f"{versionName}: {version()} "
     )
 
 
