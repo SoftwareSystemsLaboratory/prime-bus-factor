@@ -3,8 +3,7 @@ from argparse import Namespace
 import pandas
 from pandas import Categorical, DataFrame, Interval, Series
 
-from clime_bus_factor.args import mainArgs
-from clime_bus_factor.version import version
+from clime_bus_factor.args import developerCountArgs
 
 
 def buildBusFactor(df: DataFrame, bin: int) -> DataFrame:
@@ -39,11 +38,7 @@ def buildBusFactor(df: DataFrame, bin: int) -> DataFrame:
 
 
 def main() -> None:
-    args: Namespace = mainArgs()
-
-    if args.version:
-        print(f"clime-git-bus-factor-compute version {version()}")
-        quit(0)
+    args: Namespace = developerCountArgs()
 
     if args.bin < 1:
         print(f"Bin arguement must be an integer greater than 0: {args.bin}")
