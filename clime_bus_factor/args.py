@@ -19,13 +19,6 @@ def genericArgs(parser: ArgumentParser) -> None:
         default="commits_loc.json",
     )
     parser.add_argument(
-        "-o",
-        "--output",
-        help="Output JSON file. DEFAULT: ./bus_factor.json",
-        type=str,
-        default="bus_factor.json",
-    )
-    parser.add_argument(
         "-b",
         "--bin",
         help="Bin containing the number of days between computed bus factor values. DEFAULT: 1",
@@ -49,6 +42,13 @@ def busFactorArgs() -> Namespace:
     )
     genericArgs(parser=parser)
     parser.add_argument(
+        "-o",
+        "--output",
+        help="Output JSON file. DEFAULT: ./bus_factor.json",
+        type=str,
+        default="bus_factor.json",
+    )
+    parser.add_argument(
         "-a",
         "--alpha",
         help="The amount of change in the code base (measured in DLOC) a developer needs to contriubte to the project within a day in order to be considered a core contributor. DEFAULT: 0.8",
@@ -66,6 +66,13 @@ def developerCountArgs() -> Namespace:
         epilog=f"Author(s): {', '.join(authors)}",
     )
     genericArgs(parser=parser)
+    parser.add_argument(
+        "-o",
+        "--output",
+        help="Output JSON file. DEFAULT: ./developer_count.json",
+        type=str,
+        default="developer_count.json",
+    )
     return parser.parse_args()
 
 
