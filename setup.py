@@ -87,6 +87,7 @@ setup(
     entry_points={
         "console_scripts": [
             "clime-git-developer-count-compute = clime_bus_factor.developer_count:main",
+            "clime-git-bus-factor-compute = clime_bus_factor.bus_factor:main",
             "clime-git-developer-count-graph = clime_bus_factor.graph:main",
             "clime-git-bus-factor-graph = clime_bus_factor.graph:main",
         ]

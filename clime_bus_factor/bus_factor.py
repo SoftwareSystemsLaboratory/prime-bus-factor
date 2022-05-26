@@ -22,18 +22,18 @@ def get_devs(df: DataFrame, *, bin: int, alpha: float = 0.0) -> DataFrame:
         if alpha:
             temp = df[df["commitBin"] == bin]
             abs_list = lambda l: [abs(item) for item in l]
-            significance = alpha * sum(abs_list(temp["delta_loc"].tolist()))
+            significance = alpha * sum(abs_list(temp["dkloc"].tolist()))
 
             bf = 0
             authors = set(temp["author_email"].tolist())
             for author in authors:
                 author_dloc = sum(
-                    abs_list(temp[temp["author_email"] == author]["delta_loc"].tolist())
+                    abs_list(temp[temp["author_email"] == author]["dkloc"].tolist())
                 )
                 if author_dloc > significance:
                     bf += 1
 
-            temp = temp[temp["delta_loc"] > significance]
+            temp = temp[temp["dkloc"] > significance]
 
             item["bus_factor"] = bf
         else:
@@ -55,8 +55,8 @@ def main() -> None:
         print("Invalid alpha value. Must be alpha =< 1 and alpha >= 0")
         quit(2)
 
-    df = pandas.read_json(args.input)  # .T
-    bf = get_devs(df, bin=args.bin, alpha=args.alpha)
+    df: DataFrame = pandas.read_json(args.input).T
+    bf: DataFrame = get_devs(df, bin=args.bin, alpha=args.alpha)
     bf.to_json(args.output, indent=4)
 
 

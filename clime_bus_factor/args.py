@@ -1,4 +1,5 @@
 from argparse import ArgumentParser, Namespace
+
 from clime_bus_factor.version import version
 
 name: str = "PRiMe"
@@ -30,7 +31,7 @@ def genericArgs(parser: ArgumentParser) -> None:
         "--version",
         help="Display version of the tool",
         action="version",
-        version=f"{versionName}: {version()} "
+        version=f"{versionName}: {version()} ",
     )
 
 
@@ -51,12 +52,11 @@ def busFactorArgs() -> Namespace:
     parser.add_argument(
         "-a",
         "--alpha",
-        help="The amount of change in the code base (measured in DLOC) a developer needs to contriubte to the project within a day in order to be considered a core contributor. DEFAULT: 0.8",
+        help="The percent change of the code base a developer needs to contribute in a time interval . DEFAULT: 0.8",
         type=float,
         default=0.8,
-        required=True,
     )
-    return parser
+    return parser.parse_args()
 
 
 def developerCountArgs() -> Namespace:
