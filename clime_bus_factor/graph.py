@@ -47,7 +47,7 @@ def main() -> None:
     df: DataFrame = pandas.read_json(args.input)
 
     data: list = []
-    data.append(df["days_since_0"].tolist())
+    data.append(df["days_since_0"].to_dict().keys())
     data.append(df["busFactor"].tolist())
 
     plot(

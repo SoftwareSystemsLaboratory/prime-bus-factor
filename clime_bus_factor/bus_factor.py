@@ -35,7 +35,7 @@ def get_devs(df: DataFrame, *, bin: int, alpha: float = 0.0) -> DataFrame:
 
             temp = temp[temp["dkloc"] > significance]
 
-            item["bus_factor"] = bf
+            item["busFactor"] = bf
         else:
             item["devs"] = len(df[df["commitBin"] == bin]["author_email"].unique())
 
