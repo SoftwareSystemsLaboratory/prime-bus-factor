@@ -8,6 +8,53 @@ authors: list = [
 ]
 
 
+def genericArgs(parser: ArgumentParser) -> None:
+    parser.add_argument(
+        "-i",
+        "--input",
+        type=str,
+        help="Commits JSON file. DEFAULT: ./commits_loc.json",
+        default="commits_loc.json",
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        help="Output JSON file. DEFAULT: ./bus_factor.json",
+        type=str,
+        default="bus_factor.json",
+    )
+    parser.add_argument(
+        "-b",
+        "--bin",
+        help="Bin containing the number of days between computed bus factor values. DEFAULT: 1",
+        type=int,
+        default=1,
+    )
+    parser.add_argument(
+        "-v",
+        "--version",
+        help="Display version of the tool",
+        action="version",
+    )
+
+
+def busFactorArgs() -> Namespace:
+    parser: ArgumentParser = ArgumentParser(
+        prog=f"{name} Bus Factor Calculator",
+        description="A tool to calculate the bus factor of a Git repository",
+        epilog=f"Author(s): {', '.join(authors)}",
+    )
+    genericArgs(parser=parser)
+    parser.add_argument(
+        "-a",
+        "--alpha",
+        help="The amount of change in the code base (measured in DLOC) a developer needs to contriubte to the project within a day in order to be considered a core contributor. DEFAULT: 0.8",
+        type=float,
+        default=0.8,
+        required=True,
+    )
+
+
 def developerCountArgs() -> Namespace:
     parser: ArgumentParser = ArgumentParser(
         prog=f"{name} Bus Factor Calculator",
