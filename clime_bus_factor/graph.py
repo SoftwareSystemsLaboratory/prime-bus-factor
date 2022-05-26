@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 import pandas
 from pandas import DataFrame
 
-from ssl_metrics_git_bus_factor.args import graphArgs
+from clime_bus_factor.args import graphArgs
+from clime_bus_factor.version import version
 
 
 def plot(
@@ -39,11 +40,15 @@ def plot(
 def main() -> None:
     args: Namespace = graphArgs()
 
+    if args.version:
+        print(f"clime-git-bus-factor-graph version {version()}")
+        quit(0)
+
     df: DataFrame = pandas.read_json(args.input)
 
     data: list = []
     data.append(df["days_since_0"].tolist())
-    data.append(df["productivity"].tolist())
+    data.append(df["busFactor"].tolist())
 
     plot(
         x=data[0],

@@ -1,15 +1,15 @@
 from setuptools import setup
 
-from ssl_metrics_git_bus_factor import version
+from clime_bus_factor import version
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="ssl-metrics-git-bus-factor",
-    packages=["ssl_metrics_git_bus_factor"],
+    name="clime-bus-factor",
+    packages=["clime_bus_factor"],
     version=version.version(),
-    description="SSL Metrics - Bus Factor Metric",
+    description="CLIME - Bus Factor Metric",
     author="Software and Systems Laboratory - Loyola University Chicago",
     author_email="ssl-metrics@ssl.luc.edu",
     license="BSD",
@@ -17,31 +17,51 @@ setup(
     long_description_content_type="text/markdown",
     url="https://ssl.cs.luc.edu/projects/metricsDashboard",
     project_urls={
-        "Bug Tracker": "https://github.com/SoftwareSystemsLaboratory/ssl-metrics-bus-factor/issues",
-        "GitHub Repository": "https://github.com/SoftwareSystemsLaboratory/ssl-metrics-bus-factor",
+        "Bug Tracker": "https://github.com/SoftwareSystemsLaboratory/clime-bus-factor/issues",
+        "GitHub Repository": "https://github.com/SoftwareSystemsLaboratory/clime-bus-factor",
     },
     keywords=[
+        "bugzilla",
         "bus factor",
+        "bus factor",
+        "cloc",
         "commits",
+        "commits",
+        "delta lines of code",
         "engineering",
         "git",
+        "git",
         "github",
+        "github",
+        "gitlab",
+        "installable",
         "issue density",
+        "issue density",
+        "issue spoilage",
+        "issues",
         "issues",
         "kloc",
-        "loyola",
+        "lines of code",
+        "longitudinal graphs",
         "loyola university chicago",
+        "loyola",
         "luc",
-        "mining",
         "metrics",
-        "repository",
+        "metrics",
+        "mining",
+        "productivity",
+        "python",
         "repository mining",
+        "repository",
         "simple",
-        "software",
+        "sloccount",
         "software engineering",
         "software metrics",
         "software systems laboratory",
-        "ssl"
+        "software",
+        "ssl" "thousands of lines of code",
+        "tool",
+        "vcs",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -60,15 +80,14 @@ setup(
     ],
     python_requires=">=3.9",
     install_requires=[
-        "matplotlib>=3.4.3",
-        "numpy>=1.21.2",
-        "pandas>=1.3.3",
-        "scikit-learn>=1.0.1",
+        "matplotlib",
+        "numpy",
+        "pandas",
     ],
     entry_points={
         "console_scripts": [
-            "ssl-metrics-git-bus-factor-compute = ssl_metrics_git_bus_factor.main:main",
-            "ssl-metrics-git-bus-factor-graph = ssl_metrics_git_bus_factor.graph:main",
+            "clime-git-bus-factor-compute = clime_bus_factor.main:main",
+            "clime-git-bus-factor-graph = clime_bus_factor.graph:main",
         ]
     },
 )
