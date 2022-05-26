@@ -56,44 +56,16 @@ def busFactorArgs() -> Namespace:
         default=0.8,
         required=True,
     )
+    return parser
 
 
 def developerCountArgs() -> Namespace:
     parser: ArgumentParser = ArgumentParser(
-        prog=f"{name} Bus Factor Calculator",
-        description="A tool to calculate the bus factor of a Git repository",
+        prog=f"{name} Developer Counter",
+        description="A tool to count the number of unique developers in a Git project",
         epilog=f"Author(s): {', '.join(authors)}",
     )
-
-    parser.add_argument(
-        "-i",
-        "--input",
-        type=str,
-        help="Commits JSON file. DEFAULT: ./commits_loc.json",
-        default="commits_loc.json",
-    )
-    parser.add_argument(
-        "-o",
-        "--output",
-        help="Output JSON file. DEFAULT: ./bus_factor.json",
-        type=str,
-        default="bus_factor.json",
-    )
-    parser.add_argument(
-        "-b",
-        "--bin",
-        help="Bin containing the number of days between computed bus factor values. DEFAULT: 1",
-        type=int,
-        default=1,
-    )
-    parser.add_argument(
-        "-v",
-        "--version",
-        help="Display version of the tool",
-        action="store_true",
-        default=False,
-    )
-
+    genericArgs(parser=parser)
     return parser.parse_args()
 
 
@@ -122,10 +94,10 @@ def graphArgs() -> Namespace:
     )
     parser.add_argument(
         "--type",
-        help="Type of figure to plot. DEFAULT: line",
+        help="Type of figure to plot. DEFAULT: bar",
         type=str,
         required=False,
-        default="line",
+        default="bar",
     )
     parser.add_argument(
         "--title",
