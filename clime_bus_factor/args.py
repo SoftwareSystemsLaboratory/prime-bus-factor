@@ -10,8 +10,23 @@ authors: list = [
     "George K. Thiruvathukal",
 ]
 
+from argparse import HelpFormatter
+from operator import attrgetter
 
-def genericArgs(parser: ArgumentParser) -> None:
+
+class SortingHelpFormatter(HelpFormatter):
+    def add_arguments(self, actions):
+        actions = sorted(actions, key=attrgetter("option_strings"))
+        super(SortingHelpFormatter, self).add_arguments(actions)
+
+
+def busFactorArgs() -> Namespace:
+    parser: ArgumentParser = ArgumentParser(
+        prog=f"{name} Bus Factor Calculator",
+        description="A tool to calculate the bus factor of a Git repository",
+        epilog=f"Author(s): {', '.join(authors)}",
+        formatter_class=SortingHelpFormatter,
+    )
     parser.add_argument(
         "-i",
         "--input",
@@ -33,15 +48,6 @@ def genericArgs(parser: ArgumentParser) -> None:
         action="version",
         version=f"{versionName}: {version()} ",
     )
-
-
-def busFactorArgs() -> Namespace:
-    parser: ArgumentParser = ArgumentParser(
-        prog=f"{name} Bus Factor Calculator",
-        description="A tool to calculate the bus factor of a Git repository",
-        epilog=f"Author(s): {', '.join(authors)}",
-    )
-    genericArgs(parser=parser)
     parser.add_argument(
         "-o",
         "--output",
@@ -59,30 +65,20 @@ def busFactorArgs() -> Namespace:
     return parser.parse_args()
 
 
-def developerCountArgs() -> Namespace:
-    parser: ArgumentParser = ArgumentParser(
-        prog=f"{name} Developer Counter",
-        description="A tool to count the number of unique developers in a Git project",
-        epilog=f"Author(s): {', '.join(authors)}",
-    )
-    genericArgs(parser=parser)
-    parser.add_argument(
-        "-o",
-        "--output",
-        help="Output JSON file. DEFAULT: ./developer_count.json",
-        type=str,
-        default="developer_count.json",
-    )
-    return parser.parse_args()
-
-
 def graphArgs() -> Namespace:
     parser: ArgumentParser = ArgumentParser(
         prog=f"{name} Bus Factor Grapher",
         description="A tool to graph the bus factor of a repository",
         epilog=f"Author(s): {', '.join(authors)}",
+        formatter_class=SortingHelpFormatter,
     )
-
+    parser.add_argument(
+        "-y",
+        "--y-data",
+        help="The key to use for graphing the y axis data. DEFAULT: busFactor",
+        type=str,
+        default="busFactor",
+    )
     parser.add_argument(
         "-i",
         "--input",
@@ -138,8 +134,8 @@ def graphArgs() -> Namespace:
         "-v",
         "--version",
         help="Display version of the tool",
-        action="store_true",
-        default=False,
+        action="version",
+        version=f"{versionName}: {version()} ",
     )
 
     return parser.parse_args()

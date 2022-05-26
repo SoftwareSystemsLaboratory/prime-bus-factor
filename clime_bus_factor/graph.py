@@ -40,15 +40,11 @@ def plot(
 def main() -> None:
     args: Namespace = graphArgs()
 
-    if args.version:
-        print(f"clime-git-bus-factor-graph version {version()}")
-        quit(0)
-
     df: DataFrame = pandas.read_json(args.input)
 
     data: list = []
-    data.append(df["days_since_0"].tolist())
-    data.append(df["busFactor"].tolist())
+    data.append(df["days_since_0"].to_dict().keys())
+    data.append(df[args.y_data].tolist())
 
     plot(
         x=data[0],

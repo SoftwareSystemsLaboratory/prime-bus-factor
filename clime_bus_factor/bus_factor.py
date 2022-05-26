@@ -6,7 +6,9 @@ from pandas import DataFrame
 from clime_bus_factor.args import busFactorArgs
 
 
-def get_devs(df: DataFrame, *, bin: int, alpha: float = 0.0) -> DataFrame:
+def buildBusFactor(
+    df: DataFrame, *, bin: int, alpha: float = 0.0, stor: str = "busFactor"
+) -> DataFrame:
     day_key = "author_days_since_0"
     lastday = df[day_key].max() + bin
     bins = list(range(0, lastday, bin))
@@ -19,7 +21,7 @@ def get_devs(df: DataFrame, *, bin: int, alpha: float = 0.0) -> DataFrame:
 
         item = {"days_since_0": int(bin.left) if bin.left > 0 else 0}
 
-        if alpha:
+        if alpha > 0:
             temp = df[df["commitBin"] == bin]
             abs_list = lambda l: [abs(item) for item in l]
             significance = alpha * sum(abs_list(temp["dkloc"].tolist()))
@@ -35,9 +37,9 @@ def get_devs(df: DataFrame, *, bin: int, alpha: float = 0.0) -> DataFrame:
 
             temp = temp[temp["dkloc"] > significance]
 
-            item["bus_factor"] = bf
+            item[stor] = bf
         else:
-            item["devs"] = len(df[df["commitBin"] == bin]["author_email"].unique())
+            item[stor] = len(df[df["commitBin"] == bin]["author_email"].unique())
 
         data.append(item)
 
@@ -45,19 +47,24 @@ def get_devs(df: DataFrame, *, bin: int, alpha: float = 0.0) -> DataFrame:
 
 
 def main() -> None:
-
     args: Namespace = busFactorArgs()
 
+    if args.bin < 1:
+        print(f"Bin arguement must be an integer greater than 0: {args.bin}")
+        quit(1)
     if args.alpha > 1:
         print("Invalid alpha value. Must be alpha =< 1 and alpha >= 0")
-        quit(1)
+        quit(2)
     if args.alpha < 0:
         print("Invalid alpha value. Must be alpha =< 1 and alpha >= 0")
-        quit(2)
+        quit(3)
 
     df: DataFrame = pandas.read_json(args.input).T
-    bf: DataFrame = get_devs(df, bin=args.bin, alpha=args.alpha)
-    bf.to_json(args.output, indent=4)
+    bf: DataFrame = buildBusFactor(df, bin=args.bin, alpha=args.alpha, stor="busFactor")
+    cd: DataFrame = buildBusFactor(df, bin=args.bin, alpha=0, stor="developerCount")
+
+    cdColumn = cd["developerCount"]
+    bf.join(cdColumn).to_json(args.output, indent=4)
 
 
 if __name__ == "__main__":
