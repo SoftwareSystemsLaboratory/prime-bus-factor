@@ -8,7 +8,7 @@ authors: list = [
 ]
 
 
-def mainArgs() -> Namespace:
+def developerCountArgs() -> Namespace:
     parser: ArgumentParser = ArgumentParser(
         prog=f"{name} Bus Factor Calculator",
         description="A tool to calculate the bus factor of a Git repository",
