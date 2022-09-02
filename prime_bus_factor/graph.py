@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import pandas
 from pandas import DataFrame
 
-from clime_bus_factor.args import graphArgs
-from clime_bus_factor.version import version
+from prime_bus_factor.args import graphArgs
+from prime_bus_factor.version import version
 
 
 def plot(

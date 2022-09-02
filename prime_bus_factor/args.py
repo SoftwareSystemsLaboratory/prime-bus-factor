@@ -1,9 +1,9 @@
 from argparse import ArgumentParser, Namespace
 
-from clime_bus_factor.version import version
+from prime_bus_factor.version import version
 
-name: str = "PRiMe"
-versionName: str = "PRiMe Bus Factor Module"
+name: str = "PRIME"
+versionName: str = "PRIME Bus Factor Module"
 authors: list = [
     "Nicholas M. Synovic",
     "Matthew Hyatt",

@@ -3,7 +3,7 @@ from argparse import Namespace
 import pandas
 from pandas import DataFrame
 
-from clime_bus_factor.args import busFactorArgs
+from prime_bus_factor.args import busFactorArgs
 
 
 def buildBusFactor(
