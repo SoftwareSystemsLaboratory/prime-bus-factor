@@ -1,15 +1,15 @@
 from setuptools import setup
 
-from clime_bus_factor import version
+from prime_bus_factor import version
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="clime-bus-factor",
-    packages=["clime_bus_factor"],
+    name="prime-bus-factor",
+    packages=["prime_bus_factor"],
     version=version.version(),
-    description="CLIME - Bus Factor Metric",
+    description="PRIME - Bus Factor Metric",
     author="Software and Systems Laboratory - Loyola University Chicago",
     author_email="ssl-metrics@ssl.luc.edu",
     license="BSD",
@@ -17,8 +17,8 @@ setup(
     long_description_content_type="text/markdown",
     url="https://ssl.cs.luc.edu/projects/metricsDashboard",
     project_urls={
-        "Bug Tracker": "https://github.com/SoftwareSystemsLaboratory/clime-bus-factor/issues",
-        "GitHub Repository": "https://github.com/SoftwareSystemsLaboratory/clime-bus-factor",
+        "Bug Tracker": "https://github.com/SoftwareSystemsLaboratory/prime-bus-factor/issues",
+        "GitHub Repository": "https://github.com/SoftwareSystemsLaboratory/prime-bus-factor",
     },
     keywords=[
         "bugzilla",
@@ -86,8 +86,8 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "clime-git-bus-factor-compute = clime_bus_factor.bus_factor:main",
-            "clime-git-bus-factor-graph = clime_bus_factor.graph:main",
+            "prime-git-bus-factor-compute = prime_bus_facot.bus_factor:main",
+            "prime-git-bus-factor-graph = prime_bus_factor.graph:main",
         ]
     },
 )
